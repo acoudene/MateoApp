@@ -1,0 +1,54 @@
+﻿@page "/substractions"
+
+<div class="container">
+  <h1>Soustrait la table des <span class="badge badge-secondary">@MandatoryValue</span> :</h1>
+  <form class="form-inline">
+    <div class="form-group ">
+      <label for="result">@Formula</label>
+      <input type="number" id="result" class="form-control" @bind="GivenValue" />
+      <button class="btn btn-primary" @onclick="Check">Je valide !</button>
+    </div>
+  </form>
+
+  <div class="form-group">
+    <p>@Result</p>
+  </div>
+
+</div>
+@code {
+  private int MandatoryValue { get; set; }
+  private int? GivenValue { get; set; }
+  private bool? _result = false;
+  public string Result
+  {
+    get
+    {
+      return _result.HasValue ? (_result.Value ? "Super, c'est juste !" : "Refais le calcul !") : string.Empty;
+    }
+  }
+
+  public string Formula
+  {
+    get
+    {
+      return (Operation != null) ? $"{Operation.LeftOperand} {Operation.OperatorSymbol} {Operation.RightOperand} = " : string.Empty;
+    }
+  }
+  private IBinaryOperation<int> Operation { get; set; }
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    if (Operation == null || _result.HasValue && _result.Value)
+    {
+      _result = null;
+      MandatoryValue = new Random().Next(10);
+      Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<SubOperation<int>>(MandatoryValue);
+    }
+  }
+
+  private void Check()
+  {
+    _result = GivenValue.HasValue && Operation.DoOperation() == GivenValue.Value;
+  }
+}

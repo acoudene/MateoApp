@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Matheo.Math.Managers\Mateo.Math.Managers.csproj" />
+    <ProjectReference Include="..\Mateo.Math.Managers\Mateo.Math.Managers.csproj" />
   </ItemGroup>
 
 </Project>

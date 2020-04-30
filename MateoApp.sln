@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MateoApp", "MateoApp\MateoApp.csproj", "{6ACF5BA4-396A-4BFF-BAB7-651D55C7E532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MateoApp", "MateoApp\MateoApp.csproj", "{6ACF5BA4-396A-4BFF-BAB7-651D55C7E532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mateo.Math.Managers", "Matheo.Math.Managers\Mateo.Math.Managers.csproj", "{330A9084-494B-4753-926D-DB53D5D3130A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mateo.Math.Managers.Tests", "Mateo.Math.Managers.Tests\Mateo.Math.Managers.Tests.csproj", "{F841E124-34D6-4EF0-82E4-309E4C04516D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mateo.Math.Managers.Tests", "Mateo.Math.Managers.Tests\Mateo.Math.Managers.Tests.csproj", "{F841E124-34D6-4EF0-82E4-309E4C04516D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mateo.Math.Managers", "Mateo.Math.Managers\Mateo.Math.Managers.csproj", "{7230C277-537B-47A0-AD44-93C26A76DD81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{6ACF5BA4-396A-4BFF-BAB7-651D55C7E532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACF5BA4-396A-4BFF-BAB7-651D55C7E532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACF5BA4-396A-4BFF-BAB7-651D55C7E532}.Release|Any CPU.Build.0 = Release|Any CPU
-		{330A9084-494B-4753-926D-DB53D5D3130A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{330A9084-494B-4753-926D-DB53D5D3130A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{330A9084-494B-4753-926D-DB53D5D3130A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{330A9084-494B-4753-926D-DB53D5D3130A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F841E124-34D6-4EF0-82E4-309E4C04516D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F841E124-34D6-4EF0-82E4-309E4C04516D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F841E124-34D6-4EF0-82E4-309E4C04516D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F841E124-34D6-4EF0-82E4-309E4C04516D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7230C277-537B-47A0-AD44-93C26A76DD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7230C277-537B-47A0-AD44-93C26A76DD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7230C277-537B-47A0-AD44-93C26A76DD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7230C277-537B-47A0-AD44-93C26A76DD81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

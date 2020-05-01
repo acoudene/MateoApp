@@ -13,8 +13,8 @@ namespace Mateo.Math.Managers
       var IsLeftOperandMandatory = (ForceMandatoryPositionLeft.HasValue) ? (ForceMandatoryPositionLeft.Value) : new Random().Next(2) == 1;     
 
       return (IsLeftOperandMandatory)
-        ? new O() { LeftOperand = new Operand<int> { Value = mandatoryOperand }, RightOperand = new Operand<int> { Value = otherOperand } } 
-        : new O() { LeftOperand = new Operand<int> { Value = otherOperand }, RightOperand = new Operand<int> { Value = mandatoryOperand } };
+        ? new O() { LeftOperand = new Operand<int>(mandatoryOperand), RightOperand = new Operand<int>(otherOperand) } 
+        : new O() { LeftOperand = new Operand<int>(otherOperand), RightOperand = new Operand<int>(mandatoryOperand) };
     }
 
     public static O GenerateFormula<O>(int limitOperandValue = 101)
@@ -23,7 +23,7 @@ namespace Mateo.Math.Managers
       var leftOperand = new System.Random().Next(0, limitOperandValue);
       var rightOperand = new System.Random().Next(0, limitOperandValue);
 
-      return new O() { LeftOperand = new Operand<int> { Value = leftOperand }, RightOperand = new Operand<int> { Value = rightOperand } };
+      return new O() { LeftOperand = new Operand<int>(leftOperand), RightOperand = new Operand<int>(rightOperand) };
     }
   }
 }

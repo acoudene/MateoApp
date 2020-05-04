@@ -43,7 +43,7 @@
     {
       _result = null;
       MandatoryValue = new Random().Next(10);
-      Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<SubOperation<int>>(MandatoryValue);
+      Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<SubOperation<int>>(MandatoryValue, forceMandatoryPositionRight:true);
     }
   }
 

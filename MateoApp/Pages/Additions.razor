@@ -1,36 +1,49 @@
 ﻿@page "/additions"
 
-  <div class="container-fluid">
-    <h1>Additionne la table des <span class="badge badge-secondary">@MandatoryValue</span> :</h1>
-    <form class="form-inline">
-      <div class="form-group mx-sm-3 mb-2">
-        <h2 for="result"><samp>@Formula</samp></h2>
+<div class="container-fluid">
+  <h1>Additionne la table des <span class="badge badge-secondary">@MandatoryValue</span> :</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-auto">
+        <h3 for="result"><samp>@Formula</samp></h3>
+      </div>
+      <div class="col-sm-2">
         <input type="number" id="result" class="form-control mb-2" @bind="GivenValue" />
-        <button class="btn btn-primary mb-2" @onclick="Check">Je valide !</button>
       </div>
-    </form>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        
-          <span class="input-group-text" id="basic-addon1"><samp>3+4</samp></span>
-
+      <div class="col-sm-auto">
+        <button class="btn btn-primary mb-2" @onclick="Check">Valider</button>
       </div>
-      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-    <div class="form-group">
-      <p>@Result</p>
     </div>
 
+    <div id="result" class="@(GivenValue.HasValue?string.Empty:"collapse")">
+      <div class="row">
+        <div class="col-sm-auto">
+          <div class="alert @(Result?"alert-success":"alert-warning")" role="alert">
+            <p>@(Result ? "Super, c'est juste !" : $"Refais ton calcul, la réponse est {Operation.DoOperation()} !")</p>
+          </div>
+        </div>
+        <div class="col-sm-auto">
+          <button class="btn btn-primary mb-2" @onclick="Next">Continuer</button>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 @code {
   private int MandatoryValue { get; set; }
   private int? GivenValue { get; set; }
   private bool? _result = false;
-  public string Result
+
+  [Parameter]
+  public bool Result
   {
     get
     {
-      return _result.HasValue ? (_result.Value ? "Super, c'est juste !" : "Refais le calcul !") : string.Empty;
+      return _result.HasValue && _result.Value;
+    }
+    set
+    {
+      _result = value;
     }
   }
 
@@ -48,14 +61,26 @@
     base.OnInitialized();
     if (Operation == null || _result.HasValue && _result.Value)
     {
-      _result = null;
-      MandatoryValue = new Random().Next(10);
-      Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<AddOperation<int>>(MandatoryValue);
+      Init();
     }
+  }
+
+  private void Init()
+  {
+    GivenValue = null;
+    _result = null;
+    MandatoryValue = new Random().Next(1, 10);
+    Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<AddOperation<int>>(MandatoryValue);
+
   }
 
   private void Check()
   {
     _result = GivenValue.HasValue && Operation.DoOperation() == GivenValue.Value;
+  }
+
+  private void Next()
+  {
+    Init();
   }
 }

@@ -11,15 +11,15 @@
         <input type="number" id="result" class="form-control mb-2" @bind="GivenValue" />
       </div>
       <div class="col-sm-auto">
-        <button class="btn btn-primary mb-2" @onclick="Check">Valider</button>
+        <button class="btn btn-primary mb-2">Valider</button>
       </div>
     </div>
 
     <div id="result" class="@(GivenValue.HasValue?string.Empty:"collapse")">
       <div class="row">
         <div class="col-sm-auto">
-          <div class="alert @(Result?"alert-success":"alert-warning")" role="alert">
-            <p>@(Result ? "Super, c'est juste !" : $"Refais ton calcul, la réponse est {Operation.DoOperation()} !")</p>
+          <div class="alert @(Result.HasValue && Result.Value ?"alert-success":"alert-warning")" role="alert">
+            <p>@(Result.HasValue && Result.Value ? "Super, c'est juste !" : $"Refais ton calcul, la réponse est {Operation.DoOperation()} !")</p>
           </div>
         </div>
         <div class="col-sm-auto">
@@ -35,11 +35,13 @@
   private bool? _result = false;
 
   [Parameter]
-  public bool Result
+  public bool? Result
   {
     get
     {
-      return _result.HasValue && _result.Value;
+      _result = null;
+      if (GivenValue.HasValue) _result = Operation.DoOperation() == GivenValue.Value;
+      return _result;
     }
     set
     {
@@ -59,10 +61,7 @@
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    if (Operation == null || _result.HasValue && _result.Value)
-    {
-      Init();
-    }
+    Init();
   }
 
   private void Init()
@@ -72,11 +71,6 @@
     MandatoryValue = new Random().Next(1, 10);
     Operation = ExerciseOnOperation.GenerateFormulaForMandatoryOperand<AddOperation<int>>(MandatoryValue);
 
-  }
-
-  private void Check()
-  {
-    _result = GivenValue.HasValue && Operation.DoOperation() == GivenValue.Value;
   }
 
   private void Next()

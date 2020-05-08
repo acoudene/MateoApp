@@ -83,7 +83,7 @@ namespace Mateo.Math.Managers
       // quatre-vingt
       if (d == 8)
       {
-        return $"{dic[80].Trim('s')} {conjonction} {IntToFr(r)} ";
+        return $"{dic[80].Trim('s')}{conjonction}{IntToFr(r)} ";
       }
 
       // quatre-vingt dix

@@ -8,15 +8,15 @@
         <input type="number" id="result" class="form-control mb-2" @bind="GivenValue" />
       </div>
       <div class="col-sm-auto">
-        <button class="btn btn-primary mb-2" @onclick="Check">Valider</button>
+        <button class="btn btn-primary mb-2">Valider</button>
       </div>
     </div>
 
     <div id="result" class="@(GivenValue.HasValue?string.Empty:"collapse")">
       <div class="row">
         <div class="col-sm-auto">
-          <div class="alert @(Result?"alert-success":"alert-warning")" role="alert">
-            <p>@(Result ? "Super, c'est juste !" : $"Refais ton calcul, la réponse est {MandatoryValue} !")</p>
+          <div class="alert @(Result.HasValue && Result.Value ?"alert-success":"alert-warning")" role="alert">
+            <p>@(Result.HasValue && Result.Value ? "Super, c'est juste !" : $"Refais ton calcul, la réponse est {MandatoryValue} !")</p>
           </div>
         </div>
         <div class="col-sm-auto">
@@ -29,14 +29,16 @@
 @code {
   private int MandatoryValue { get; set; }
   private int? GivenValue { get; set; }
-  private bool? _result = false;
+  private bool? _result = null;
 
   [Parameter]
-  public bool Result
+  public bool? Result
   {
     get
     {
-      return _result.HasValue && _result.Value;
+      _result = null;
+      if (GivenValue.HasValue) _result = MandatoryValue == GivenValue.Value;
+      return _result;
     }
     set
     {
@@ -47,19 +49,13 @@
   protected override void OnInitialized()
   {
     base.OnInitialized();
-    Init();    
+    Init();
   }
 
   private void Init()
   {
     GivenValue = null;
-    _result = null;
-    MandatoryValue = new Random().Next(0, 100);    
-  }
-
-  private void Check()
-  {
-    _result = GivenValue.HasValue && MandatoryValue == GivenValue.Value;
+    MandatoryValue = new Random().Next(0, 100);
   }
 
   private void Next()
